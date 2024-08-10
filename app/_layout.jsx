@@ -9,6 +9,7 @@ const [fontsLoaded,error]=useFonts({
   'Poppins-Regular': require('../assets/fonts/Poppins-Regular.ttf'),
   'Poppins-Bold': require('../assets/fonts/Poppins-Bold.ttf'),
   'Poppins-Black': require('../assets/fonts/Poppins-Black.ttf'),
+  'Poppins-Medium': require('../assets/fonts/Poppins-Medium.ttf'),
   'Poppins-SemiBold': require('../assets/fonts/Poppins-SemiBold.ttf'),
 
 })
@@ -26,6 +27,9 @@ const [fontsLoaded,error]=useFonts({
     <>
     <Stack>
         <Stack.Screen name='index' options={{headerShown: false}} />    
+        <Stack.Screen name='(auth)' options={{headerShown: false}} />  
+        <Stack.Screen name='(tabs)' options={{headerShown: false}} />  
+        {/* <Stack.Screen name='/search/[query]' options={{headerShown: false}} />   */}
     </Stack>
     </>
 

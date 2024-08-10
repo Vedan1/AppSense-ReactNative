@@ -1,11 +1,75 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Image,Text, ScrollView } from 'react-native'
+import React, { useState } from 'react'
+import { SafeAreaView, useSafeAreaFrame } from 'react-native-safe-area-context'
+
+import { images } from '../../constants'
+import FormField from '../components/FormField'
+
+import CustomButton from '../components/CustomButton'
+import { Link } from 'expo-router'
+
 
 const SignIn = () => {
+
+  const[form,setForm] = useState({
+    email: '',
+    password: '',
+  
+  })
+
+  const [isSubmitting, setIsSubmitting] = useState(true)
+
+
+  const submit=()=>{
+
+  }
+  
   return (
-    <View>
-      <Text>This is an sign in status</Text>
-    </View>
+    <SafeAreaView className='bg-primary h-full'>
+      <ScrollView>
+        <View className='w-full justify-center  min-h-[85vh]  px-6 my-6'>
+        <Image
+        source={images.logo}
+        className = 'w-[115px] h-[35px]'
+        resizeMode='contain'
+        />
+          <Text className='text-2xl  mt-10 font-bold text-white'>Welcome</Text>
+          <Text className='text-lg font-medium text-white mt-2'>Sign In to Continue</Text>
+        
+        <FormField 
+          title='Email'
+          value={form.email}
+          handleChangeText={(e)=>setForm({
+            ...form, email:e
+          })}
+          otherStyles='mt-7'
+          keyboardType='email-address'
+        />
+
+        <FormField 
+          title='Password'
+          value={form.password}
+          handleChangeText={(e)=>setForm({
+            ...form, password: e
+          })}
+          otherStyles='mt-7'
+          keyboardType='password'
+        />
+
+        <CustomButton 
+          title='Sign In' 
+          handlePress={submit}
+          containerStyles='mt-7'
+          isLoading={isSubmitting}
+        />
+        <View className='items-center justify-center mt-5 flex-row '>
+          <Text className='text-gray-100 text-base font-pregular' >Don't have an Account?</Text>
+          <Link className='text-secondary text-base font-psemibold' href={'/sign-up'}> Sign-Up </Link>
+        </View>
+
+        </View>   
+      </ScrollView>
+    </SafeAreaView>
   )
 }
 
