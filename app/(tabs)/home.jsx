@@ -7,37 +7,21 @@ import SearchInput from '../components/SearchInput'
 import Trending from '../components/Trending'
 import EmptyState from '../components/EmptyState'
 import { getAllPosts } from '../../lib/appwrite'
+import useAppwrite from '../../lib/useAppwrite'
 
 
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false)
-  const [data,setData] = useState([])
-  const [loading,isLoading] = useState(true)
 
+  const {data: posts} = useAppwrite(getAllPosts);
+  
   const onRefresh=async ()=>{
-    setRefreshing(true);
-    setRefreshing(false);
-  }
-
-  useEffect(()=>{
-    const fetchData = async () => {
-      isLoading(true)
-
-      try {
-        const response = await getAllPosts()
-        setData(response)
-      } catch (error) {
-        Alert.alert('error',error)
-      }finally{
-        isLoading(false)
-      }
-    }
-    fetchData()
-  },[])
-console.log(data)
-
+  setRefreshing(true);
+  setRefreshing(false);
+}
+  console.log(posts)
   return (
-   <>
+<>
     <SafeAreaView className='bg-primary h-full' >
       <FlatList 
        data={[{id: 1},{id: 2},{id: 3},{id: 4}]}
@@ -75,7 +59,7 @@ console.log(data)
         />
       }}
    
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}    k/>}
+      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
       />
     </SafeAreaView> 
    </>
