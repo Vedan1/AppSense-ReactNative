@@ -1,11 +1,19 @@
-import { View, Text } from 'react-native'
+import { View, Text, FlatList } from 'react-native'
 import React from 'react'
 
-const Trending = () => {
+const Trending = ({posts}) => {
   return (
-    <View>
-      <Text>Trending</Text>
-    </View>
+    // Flatlist returns Horizontal scroll as compared to ScrollView which returns only horizontal view
+    <FlatList
+      data={posts}
+    keyExtractor={(item)=>item.$id}
+    renderItem={({item})=>(
+      <View>
+        <Text className='text-3xl text-white'>{item.id}</Text>
+      </View>
+    )}
+    horizontal
+/>
   )
 }
 
