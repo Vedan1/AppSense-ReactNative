@@ -15,6 +15,7 @@ const SearchInput = ({title,otherStyles,keyboardType,placeholder,handleChangeTex
           onChangeText={handleChangeText}
           value={value}
           placeholder={"Search for a Video"}
+          placeholderTextColor={'#fffa'}
         />
 
         <TouchableOpacity>

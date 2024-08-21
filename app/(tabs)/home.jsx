@@ -6,7 +6,7 @@ import { images } from '../../constants'
 import SearchInput from '../components/SearchInput'
 import Trending from '../components/Trending'
 import EmptyState from '../components/EmptyState'
-import { getAllPosts } from '../../lib/appwrite'
+import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 import VideoCard from '../components/VideoCard'
 
@@ -14,13 +14,14 @@ import VideoCard from '../components/VideoCard'
 const Home = () => {
   const [refreshing, setRefreshing] = useState(false)
 
-  const {data: posts} = useAppwrite(getAllPosts);
+  const {data: posts, refetch} = useAppwrite(getAllPosts); 
+  const {data: latestPosts} = useAppwrite(getLatestPosts);
   
   const onRefresh=async ()=>{
   setRefreshing(true);
   setRefreshing(false);
 }
-  console.log(posts)
+  // console.log(posts)
   return (
 <>
     <SafeAreaView className='bg-primary h-full' >
@@ -46,9 +47,11 @@ const Home = () => {
             </View>
           </View>
           <SearchInput />
+
+
           <View className='w-full flex-1 pt-5 pb-8'>
             <Text className='text-gray-100 text-lg font-pregular'>Latest Videos</Text>
-            <Trending posts={[{id:1},{id:2},{id:3},{id:4},{id:5},{id:6},{id:7}]?? []}/> 
+            <Trending posts={latestPosts ?? []}/> 
                                                                 {/* if no data, return [] blank array */}
           </View>
         </View>

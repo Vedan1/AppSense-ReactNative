@@ -1,15 +1,11 @@
 import { useEffect, useState } from "react"
+import  Alert  from "react-native"
 
 const useAppwrite= (fn) =>{
 
     const [data,setData] = useState([])
     const [loading,isLoading] = useState(true)
   
-  
-  
-
-    
-    
       const fetchData = async () => {
         isLoading(true)
   
@@ -17,7 +13,7 @@ const useAppwrite= (fn) =>{
           const response = await fn()
           setData(response)
         } catch (error) {
-          Alert.alert('error',error)
+          Alert.Alert('error',error)
         }finally{
           isLoading(false)
         }
